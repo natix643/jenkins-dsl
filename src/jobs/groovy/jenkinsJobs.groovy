@@ -2,27 +2,31 @@ import groovy.transform.Field
 import groovy.transform.TypeChecked
 
 @Field String GIT_REPO = 'git@github.com:natix643/jenkins-dsl.git'
+@Field List<String> branches = ['master', 'development']
 
 @TypeChecked
 makeJobs() {
-    job("jenkins-dsl - master - build") {
-        scm {
-            git {
-                remote {
-                    url GIT_REPO
-                    branch 'master'
+    branches.each { branchName ->
+
+        job("jenkins-dsl - $branchName - build") {
+            scm {
+                git {
+                    remote {
+                        url GIT_REPO
+                        branch branchName
+                    }
                 }
             }
-        }
 
-        triggers {
-            scm 'H/2 * * * *'
-        }
+            triggers {
+                scm 'H/2 * * * *'
+            }
 
-        steps {
-            gradle {
-                tasks 'clean build'
-                makeExecutable true
+            steps {
+                gradle {
+                    tasks 'clean build'
+                    makeExecutable true
+                }
             }
         }
     }
