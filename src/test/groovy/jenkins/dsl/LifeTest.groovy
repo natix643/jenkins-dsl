@@ -1,18 +1,16 @@
 package jenkins.dsl
 
-import org.junit.Test
+import spock.lang.Specification
 
-class LifeTest {
+class LifeTest extends Specification{
 
     def life = new Life()
 
-    @Test
-    void iChoseLife() {
+    def 'I chose life'() {
         assert life.chooseIt() == 'your future'
     }
 
-    @Test
-    void iChoseNotToChooseLife() {
+    def 'I chose not to choose life'() {
         assert life.chooseSomethingElse() == 'heroin'
     }
 }
