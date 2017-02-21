@@ -1,11 +1,23 @@
 apply plugin: 'groovy'
 
+sourceSets {
+    jobs {
+        groovy {
+            compileClasspath += main.compileClasspath
+        }
+    }
+}
+
 repositories {
     jcenter()
+    maven {
+        url 'http://repo.jenkins-ci.org/releases/'
+    }
 }
 
 dependencies {
-    compile 'org.codehaus.groovy:groovy:2.4.8'
+    compile 'org.codehaus.groovy:groovy-all:2.4.8'
+    compile 'org.jenkins-ci.plugins:job-dsl-core:1.58'
 
     testCompile 'junit:junit:4.12'
 }
