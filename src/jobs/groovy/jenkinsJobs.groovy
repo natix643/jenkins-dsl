@@ -1,13 +1,18 @@
 import groovy.transform.Field
 import groovy.transform.TypeChecked
 
-@Field String GITHUB_REPO = 'natix643/jenkins-dsl'
+@Field String GIT_REPO = 'git@github.com:natix643/jenkins-dsl.git'
 
 @TypeChecked
-def makeJobs() {
-    job("master - build") {
+makeJobs() {
+    job("jenkins-dsl - master - build") {
         scm {
-            github(GITHUB_REPO, 'master')
+            git {
+                remote {
+                    url GIT_REPO
+                    branch 'master'
+                }
+            }
         }
 
         triggers {

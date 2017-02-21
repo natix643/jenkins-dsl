@@ -1,6 +1,6 @@
 package jenkins.dsl
 
-import org.junit.Test;
+import org.junit.Test
 
 class LifeTest {
 
